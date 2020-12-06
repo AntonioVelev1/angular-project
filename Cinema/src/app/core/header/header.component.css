@@ -1,0 +1,40 @@
+nav div:not(:first-child) {
+    text-align: right;
+}
+
+nav {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 30px;
+    width: 100%;
+    background-color: green;
+}
+
+a:hover {
+    text-decoration: overline;
+    text-decoration-color: white;
+}
+
+.navitem {
+    display: inline-block;
+    color: white;
+    padding: 8px 16px;
+    margin-left: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#titleOfApp {
+    color: white;
+    /* background-color: rgb(255, 30, 0); */
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: arial, helvetica, verdana, sans-serif;
+    font-weight: 900;
+}
+
+hr{
+    background-color: black;
+}

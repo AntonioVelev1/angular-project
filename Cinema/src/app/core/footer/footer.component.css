@@ -1,0 +1,10 @@
+footer {
+    background-color: green;
+    color: white;
+    text-transform: capitalize;
+    text-align: justify;
+    padding: 6px;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 25px;
+}
