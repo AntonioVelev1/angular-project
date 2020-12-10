@@ -1,1 +1,19 @@
-<p>register works!</p>
+<h1>Register</h1>
+
+<form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
+    <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input #userUsername="ngModel" type="text" placeholder="Enter Username" name="username" ngModel>
+
+        <label for="email"><b>Email</b></label>
+        <input #userEmail="ngModel" ngModel type="text" placeholder="Enter Email" name="email" >
+
+        <label for="password"><b>Password</b></label>
+        <input #userPassword="ngModel" ngModel type="password" placeholder="Enter Password" name="password">
+
+        <label for="rePassword"><b>Repeat Password</b></label>
+        <input #userRePassword="ngModel" ngModel type="password" placeholder="Repeat Password" name="rePassword">
+
+        <button routerLink='/user/register' >Register</button>
+    </div>
+</form>

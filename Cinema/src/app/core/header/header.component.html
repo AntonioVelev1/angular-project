@@ -1,9 +1,17 @@
 <header>
+    <div class="logo-wrap">
+        <p class="logo"><span class="logo">Cinema</span></p>
+    </div>
     <nav>
-        <a class="navitem" routerLink="/home">Cinema City</a>
-        <a class="navitem" routerLink="/home">Home</a>
-        <a class="navitem" routerLink="/user/login">Login</a>
-        <a class="navitem" routerLink="/user/register">Register</a>
+        <ul>
+            <a class="navitem" routerLink="/home">Cinema City</a>
+            <a class="navitem" routerLink="/home">Home</a>
+            <a class="navitem" routerLink="/user/login">Login</a>
+            <a class="navitem" routerLink="/user/register">Register</a>
+            <a class="navitem" (click)="logoutHandler()">Logout</a>
+        </ul>
     </nav>
 </header>
 <hr>
+
+<!-- {{currentUser.username}} -->

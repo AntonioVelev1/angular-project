@@ -1,1 +1,11 @@
-<p>login works!</p>
+<form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
+    <div class="container">
+        <label for="email"><b>Email</b></label>
+        <input #userEmail="ngModel" ngModel type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="password"><b>Password</b></label>
+        <input #userPassword="ngModel" ngModel type="password" placeholder="Enter Password" name="password" required>
+
+        <button type="submit">Login</button>
+    </div>
+</form>

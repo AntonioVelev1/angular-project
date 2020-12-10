@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
+import { IUser } from 'src/app/shared/interfaces/user';
 import { UserService } from '../../user/user.service';
 
 @Component({
@@ -14,23 +15,27 @@ export class HeaderComponent {
 
   subscription: Subscription;
 
+  get currentUser(): IUser {
+    return this.userService.currentUser;
+  }
+
   get isLogged(): boolean {
     return null; //this.userService.isLogged;
   }
 
   constructor(
     title: Title,
-   // public userService: UserService,
+    public userService: UserService,
     private router: Router) { 
 
-      router.events.pipe(
-        filter(e => e instanceof ActivationEnd),
-        buffer(router.events.pipe(filter(e=>e instanceof NavigationEnd), debounceTime(0))),
-        map((events: ActivationEnd[]) => events.reduce((acc,curr) => ({...acc, ...curr.snapshot.data}))),
-      ).subscribe(console.log);
+      // router.events.pipe(
+      //   filter(e => e instanceof ActivationEnd),
+      //   buffer(router.events.pipe(filter(e=>e instanceof NavigationEnd), debounceTime(0))),
+      //   map((events: ActivationEnd[]) => events.reduce((acc,curr) => ({...acc, ...curr.snapshot.data}))),
+      // ).subscribe(console.log);
     }
 
   logoutHandler(): void {
-    //this.userService.logout().subscribe(() => this.router.navigate(['/user/login']));
+    this.userService.logout().subscribe(() => this.router.navigate(['/user/login']));
   }
 }

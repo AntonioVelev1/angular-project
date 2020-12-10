@@ -9,8 +9,8 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { UserRoutingModule } from './user/user-routing.module';
 import { UserModule } from './user/user.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { UserModule } from './user/user.module';
     BrowserModule,
     RouterModule,
     UserModule,
+    HttpClientModule,
     AppRoutingModule,
   ],
   providers: [],
