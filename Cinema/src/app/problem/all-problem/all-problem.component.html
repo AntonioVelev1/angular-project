@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+<h1>All</h1>
+
+<div *ngFor="let problem of problemList">
+    <div class="row">
+        <div class="col-md-7">
+            <!-- <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+        </a> -->
+        </div>
+        <div class="col-md-5">
+            <h3>{{problem.problemName}}</h3>
+            <p>{{problem.description}}</p>
+            <img [src]="problem.imageUrl" alt="">
+            <!-- <a class="btn btn-primary" href="#">View Project</a> -->
+        </div>
+    </div>
+</div>

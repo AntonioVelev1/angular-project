@@ -1,0 +1,16 @@
+<h1>Create problem</h1>
+
+<form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
+    <div class="container">
+        <label for="problemName"><b>Name</b></label>
+        <input #problemName="ngModel" type="text" placeholder="Enter name of your problem" name="problemName" ngModel>
+
+        <label for="description"><b>Description</b></label>
+        <input #problemDescription="ngModel" type="text" placeholder="Enter description of your problem" name="description" ngModel>
+
+        <label for="imageUrl"><b>Image</b></label>
+        <input #problemImageUrl="ngModel" type="text" placeholder="Enter imageUrl of your problem" name="imageUrl" ngModel>
+
+        <button routerLink='/problem/create'>Create</button>
+    </div>
+</form>

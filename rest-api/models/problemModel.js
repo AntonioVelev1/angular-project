@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
-const themeSchema = new mongoose.Schema({
-    themeName: {
+const problemSchema = new mongoose.Schema({
+    problemName: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    imageUrl: {
+        type: String
     },
     subscribers: [{
         type: ObjectId,
@@ -20,4 +27,4 @@ const themeSchema = new mongoose.Schema({
     }],
 }, { timestamps: { createdAt: 'created_at' } });
 
-module.exports = mongoose.model('Theme', themeSchema);
+module.exports = mongoose.model('problem', problemSchema);

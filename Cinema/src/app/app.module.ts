@@ -11,6 +11,7 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ProblemModule } from './problem/problem.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     UserModule,
     HttpClientModule,
     AppRoutingModule,
+    ProblemModule
   ],
   providers: [],
   bootstrap: [

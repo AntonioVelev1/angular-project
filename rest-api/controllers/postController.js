@@ -1,11 +1,11 @@
-const { userModel, themeModel, postModel } = require('../models');
+const { userModel, problemModel, postModel } = require('../models');
 
-function newPost(text, userId, themeId) {
-    return postModel.create({ text, userId, themeId })
+function newPost(text, userId, problemId) {
+    return postModel.create({ text, userId, problemId })
         .then(post => {
             return Promise.all([
-                userModel.updateOne({ _id: userId }, { $push: { posts: post._id }, $addToSet: { themes: themeId } }),
-                themeModel.findByIdAndUpdate({ _id: themeId }, { $push: { posts: post._id }, $addToSet: { subscribers: userId } }, { new: true })
+                userModel.updateOne({ _id: userId }, { $push: { posts: post._id }, $addToSet: { problems: problemId } }),
+                problemModel.findByIdAndUpdate({ _id: problemId }, { $push: { posts: post._id }, $addToSet: { subscribers: userId } }, { new: true })
             ])
         })
 }
@@ -16,7 +16,7 @@ function getLatestsPosts(req, res, next) {
     postModel.find()
         .sort({ created_at: -1 })
         .limit(limit)
-        .populate('themeId userId')
+        .populate('problemId userId')
         .then(posts => {
             res.status(200).json(posts)
         })
@@ -24,12 +24,12 @@ function getLatestsPosts(req, res, next) {
 }
 
 function createPost(req, res, next) {
-    const { themeId } = req.params;
+    const { problemId } = req.params;
     const { _id: userId } = req.user;
     const { postText } = req.body;
 
-    newPost(postText, userId, themeId)
-        .then(([_, updatedTheme]) => res.status(200).json(updatedTheme))
+    newPost(postText, userId, problemId)
+        .then(([_, updatedproblem]) => res.status(200).json(updatedproblem))
         .catch(next);
 }
 
@@ -52,13 +52,13 @@ function editPost(req, res, next) {
 }
 
 function deletePost(req, res, next) {
-    const { postId, themeId } = req.params;
+    const { postId, problemId } = req.params;
     const { _id: userId } = req.user;
 
     Promise.all([
         postModel.findOneAndDelete({ _id: postId, userId }),
         userModel.findOneAndUpdate({ _id: userId }, { $pull: { posts: postId } }),
-        themeModel.findOneAndUpdate({ _id: themeId }, { $pull: { posts: postId } }),
+        problemModel.findOneAndUpdate({ _id: problemId }, { $pull: { posts: postId } }),
     ])
         .then(([deletedOne, _, __]) => {
             if (deletedOne) {
