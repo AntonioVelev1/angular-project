@@ -13,7 +13,7 @@ const problemSchema = new mongoose.Schema({
     imageUrl: {
         type: String
     },
-    subscribers: [{
+    likes: [{
         type: ObjectId,
         ref: "User"
     }],
@@ -21,9 +21,9 @@ const problemSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
-    posts: [{
+    comments: [{
         type: ObjectId,
-        ref: "Post"
+        ref: "comment"
     }],
 }, { timestamps: { createdAt: 'created_at' } });
 

@@ -43,7 +43,7 @@ Signs up user and returns the registered data as json.
 
 ### URL --> ```/users/register```
 
-### Method --> ```POST```
+### Method --> ```comment```
 
 ### Body -->
 
@@ -77,7 +77,7 @@ Content:
 ``` 
 {
     "problems": [],
-    "posts": [],
+    "comments": [],
     "_id": "5f1875690916010017964978",
     "name": "John Doe",
     "email": "john@email.com",
@@ -103,7 +103,7 @@ Signs in user and returns the registered data as json.
 
 ### URL --> ```/users/login```
 
-### Method --> ```POST```
+### Method --> ```comment```
 
 ### Body -->
 
@@ -128,7 +128,7 @@ Content:
 ``` 
 {
     "problems": ["5f85c51996b5601b2406e5b7"],
-    "posts": ["5f86bdcde012743fe4f5b324"],
+    "comments": ["5f86bdcde012743fe4f5b324"],
     "_id": "5f1875690916010017964978",
     "name": "John Doe",
     "email": "john@email.com",
@@ -154,7 +154,7 @@ Logout user.
 
 ### URL --> ```/users/logout```
 
-### Method --> ```POST```
+### Method --> ```comment```
 
 ### Success Response:
 
@@ -188,7 +188,7 @@ Content:
 [
     {
         "subscribers": ["5f8580d25d1da62568dd38fd"],
-        "posts": ["5f858dd2d895ad23602db9d5"],
+        "comments": ["5f858dd2d895ad23602db9d5"],
         "_id": "5f858dd2d895ad23602db9d4",
         "problemName": "Some problem",
         "userId": "5f8580d25d1da62568dd38fd",
@@ -210,26 +210,26 @@ Content:
 }
 ```
 
-## Post problem
-Creates new problem with the first post of the author and returns the problem as json.
+## comment problem
+Creates new problem with the first comment of the author and returns the problem as json.
 
 ### URL --> ```/problems```
 
-### Method --> ```POST```
+### Method --> ```comment```
 
 ### Body -->
 
 ```
 {
     "problemName": "Some problem Title",
-    "postText": "Some Post text"
+    "commentText": "Some comment text"
 }
 ```
 
 Required:
 
 ```problemName``` : [string] -- The Title of your new problem, which you want to create
-```postText``` : [string] -- The text of your post. This post will be append as first comment on your problem.
+```commentText``` : [string] -- The text of your comment. This comment will be append as first comment on your problem.
 
 ### Success Response:
 
@@ -239,7 +239,7 @@ Content:
 ``` 
 {
     "subscribers": ["5f86c1f0a112c130e89964af"],
-    "posts": ["5f86c38abfa44331a0ff0094"],
+    "comments": ["5f86c38abfa44331a0ff0094"],
     "_id": "5f86c38abfa44331a0ff0093",
     "problemName": "Some problem Title",
     "userId": "5f86c1f0a112c130e89964af",
@@ -260,18 +260,18 @@ Content:
 }
 ```
 
-## Create Post
-Creates new Post of the author and returns the problem as json.
+## Create comment
+Creates new comment of the author and returns the problem as json.
 
 ### URL --> ```/problems/:problemId```
 
-### Method --> ```POST```
+### Method --> ```comment```
 
 ### Body -->
 
 ```
 {
-    "postText": "Some Post text"
+    "commentText": "Some comment text"
 }
 ```
 
@@ -283,7 +283,7 @@ Content:
 ``` 
 {
 "subscribers": ["5f8580d25d1da62568dd38fd"],
-"posts": [
+"comments": [
     "5f85ad8f1141b13a04a9139c",
     "5f85b2501141b13a04a9139d"
 ],
@@ -307,14 +307,14 @@ Content:
 }
 ```
 
-# Endpoints: Posts
+# Endpoints: comments
 
-* ```/problems/:problemId/posts/:postId```
+* ```/problems/:problemId/comments/:commentId```
 
-## Edit Post
-Edit Post if the user is the author of the post and returns the changed post.
+## Edit comment
+Edit comment if the user is the author of the comment and returns the changed comment.
 
-### URL --> ```/problems/:problemId/posts/:postId```
+### URL --> ```/problems/:problemId/comments/:commentId```
 
 ### Method --> ```PUT```
 
@@ -322,7 +322,7 @@ Edit Post if the user is the author of the post and returns the changed post.
 
 ```
 {
-    "postText": "Changed text"
+    "commentText": "Changed text"
 }
 ```
 
@@ -364,10 +364,10 @@ Content:
 }
 ```
 
-## Delete Post
-Deletes Post if the user is the author of the post and returns the deleted post.
+## Delete comment
+Deletes comment if the user is the author of the comment and returns the deleted comment.
 
-### URL --> ```/problems/:problemId/posts/:postId```
+### URL --> ```/problems/:problemId/comments/:commentId```
 
 ### Method --> ```DELETE```
 
@@ -408,10 +408,10 @@ Content:
     message: "Something went wrong!"
 }
 ```
-## Like Post
-Adds like to the post.
+## Like comment
+Adds like to the comment.
 
-### URL --> ```/likes/:postId```
+### URL --> ```/likes/:commentId```
 
 ### Method --> ```PUT```
 
@@ -441,25 +441,25 @@ Content:
 
 
 <!-- users
-.post /register - register new user
-.post /login - login user
-.post /logout - logout user
+.comment /register - register new user
+.comment /login - login user
+.comment /logout - logout user
 
 .get /profile - get user info
-.post /profile - post user info
+.comment /profile - comment user info
 .put /profile - edit user info
 
 problems
 .get /problems - lists all problems
-.post /problems - create new problem only for registered users
+.comment /problems - create new problem only for registered users
 
-posts:
-.get problems/id - get all posts for problem
-.post problems/id - create post in problem by id only for registered users
-.put problems/id/posts/id - edit post only possible for author
-.delete problems/id/posts/id - delete post only possible for author -->
+comments:
+.get problems/id - get all comments for problem
+.comment problems/id - create comment in problem by id only for registered users
+.put problems/id/comments/id - edit comment only possible for author
+.delete problems/id/comments/id - delete comment only possible for author -->
 
 
 <!-- http://localhost:3000/api/users/register --  {"name":"SomeName","email":"some@email.com","username":"someUsername","password":"12345","rePassword":"12345"} -->
-<!--http://localhost:3000/api/problems -- {"problemName":"Some problem", "userId":"5f85bf709a517d36f4abe656", "post": "Some Post" } -->
-<!-- http://localhost:3000/api/problems/5f858dd2d895ad23602db9d4  -- {"userId":"5f8580d25d1da62568dd38fd", "postText": "Some Post textsdfasdf" } -->
+<!--http://localhost:3000/api/problems -- {"problemName":"Some problem", "userId":"5f85bf709a517d36f4abe656", "comment": "Some comment" } -->
+<!-- http://localhost:3000/api/problems/5f858dd2d895ad23602db9d4  -- {"userId":"5f8580d25d1da62568dd38fd", "commentText": "Some comment textsdfasdf" } -->

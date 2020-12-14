@@ -1,5 +1,8 @@
 const { problemModel } = require('../models');
-const { newPost } = require('./postController');
+const { userModel } = require('../models');
+const { commentModel } = require('../models');
+const { deleteOne } = require('../models/userModel');
+const { newcomment } = require('./commentController');
 
 function getproblems(req, res, next) {
     problemModel.find()
@@ -13,11 +16,11 @@ function getproblem(req, res, next) {
 
     problemModel.findById(problemId)
         .populate({
-            path : 'posts',
-            populate : {
-              path : 'userId'
+            path: 'comments',
+            populate: {
+                path: 'userId'
             }
-          })
+        })
         .then(problem => res.json(problem))
         .catch(next);
 }
@@ -29,8 +32,26 @@ function createproblem(req, res, next) {
     problemModel.create({ problemName, description, imageUrl, userId, subscribers: [userId] })
         .then(problem => {
             res.status(200).json(problem);
-            // newPost(postText, userId, problem._id)
+            // newcomment(commentText, userId, problem._id)
             //     .then(([_, updatedproblem]) => res.status(200).json(updatedproblem))
+        })
+        .catch(next);
+}
+
+function deleteProblem(req, res, next) {
+    const problemId = req.params;
+    const { id: userId } = req.user;
+
+    Promise.all([
+        problemModel.findOneAndDelete({ id: problemId, userId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { problems: problemId } }),
+    ])
+        .then(([deletedOne, te, test]) => {
+            if (deletedOne) {
+                res.status(200).json(deletedOne);
+            } else {
+                res.status(401).json({ message: 'Not allowed!' })
+            }
         })
         .catch(next);
 }
@@ -49,5 +70,6 @@ module.exports = {
     getproblems,
     createproblem,
     getproblem,
+    deleteProblem,
     subscribe,
 }

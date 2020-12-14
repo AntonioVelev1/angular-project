@@ -20,7 +20,7 @@ export class HeaderComponent {
   }
 
   get isLogged(): boolean {
-    return null; //this.userService.isLogged;
+    return this.userService.isLogged;
   }
 
   constructor(

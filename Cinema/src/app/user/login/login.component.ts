@@ -9,6 +9,9 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
+  isLoading = false;
+  errorMessage = '';
+
   constructor(
     private userService: UserService,
     private router: Router
@@ -18,11 +21,16 @@ export class LoginComponent implements OnInit {
   }
 
   submitFormHandler(data: any): void {
+    this.isLoading = true;
+    this.errorMessage = '';
     this.userService.login(data).subscribe({
       next: () => {
+        this.isLoading = false;
         this.router.navigate(['/']);
       },
       error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = err.error.message;
         console.log(err);
       }
     });

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IUser } from '../shared/interfaces/user';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 const apiUrl = environment.apiUrl;
 
@@ -16,13 +16,15 @@ export class UserService {
 
   }
 
-  login(data: any): Observable<any> {
+  get isLogged(): boolean { return !!this.currentUser; }
+
+  login(data): Observable<IUser> {
     return this.http.post(`${apiUrl}/users/login`, data, { withCredentials: true }).pipe(
       tap((user: IUser | null) => this.currentUser = user)
     );
   }
 
-  register(data: any): Observable<any> {
+  register(data): Observable<IUser> {
     return this.http.post(`${apiUrl}/users/register`, data, { withCredentials: true }).pipe(
       tap((user: IUser | null) => this.currentUser = user)
     );
@@ -31,6 +33,13 @@ export class UserService {
   logout(): Observable<any> {
     return this.http.post(`${apiUrl}/users/logout`, {}, { withCredentials: true }).pipe(
       tap(() => this.currentUser = null)
+    );
+  }
+
+  profile(): Observable<IUser> {
+    return this.http.get(`${apiUrl}/users/profile`, { withCredentials: true }).pipe(
+      tap(((user: IUser) => this.currentUser = user)),
+      catchError(() => { this.currentUser = null; return of(null); })
     );
   }
 

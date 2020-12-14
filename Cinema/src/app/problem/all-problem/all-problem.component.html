@@ -1,6 +1,11 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
+<div *ngIf="isLoading">
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
 <h1>All</h1>
+
 
 <div *ngFor="let problem of problemList">
     <div class="row">
@@ -13,7 +18,7 @@
             <h3>{{problem.problemName}}</h3>
             <p>{{problem.description}}</p>
             <img [src]="problem.imageUrl" alt="">
-            <!-- <a class="btn btn-primary" href="#">View Project</a> -->
+            <a class="btn btn-primary" (click)="deleteProblem(problem._id)">Delete</a>
         </div>
     </div>
 </div>

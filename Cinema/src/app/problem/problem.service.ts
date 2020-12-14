@@ -18,4 +18,8 @@ export class ProblemService {
   allProblems(): Observable<IProblem[]> {
     return this.http.get<IProblem[]>(`${apiUrl}/problems/all`, { withCredentials: true });
   }
+
+  deleteProblem(id: string): Observable<any> {
+    return this.http.delete<any>(`${apiUrl}/problems/delete/${id}`, { withCredentials: true });
+  }
 }

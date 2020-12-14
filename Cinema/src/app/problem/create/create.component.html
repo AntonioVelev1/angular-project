@@ -1,5 +1,9 @@
 <h1>Create problem</h1>
 
+<div *ngIf="isLoading">
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
 <form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
     <div class="container">
         <label for="problemName"><b>Name</b></label>

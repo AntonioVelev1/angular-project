@@ -12,6 +12,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProblemModule } from './problem/problem.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProblemModule } from './problem/problem.module';
     UserModule,
     HttpClientModule,
     AppRoutingModule,
-    ProblemModule
+    ProblemModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [

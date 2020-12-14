@@ -1,19 +1,54 @@
+<div *ngIf="isLoading">
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
 <h1>Register</h1>
 
 <form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
     <div class="container">
         <label for="username"><b>Username</b></label>
-        <input #userUsername="ngModel" type="text" placeholder="Enter Username" name="username" ngModel>
+        <input #userUsername="ngModel" type="text" placeholder="Enter Username" name="username" ngModel required minlength="5">
+        <p *ngIf="userUsername.touched && userUsername.errors?.minlength" class="error ">
+            Username must be at least 5 characters!
+        </p>
+        <p *ngIf="userUsername.touched && userUsername.errors?.required" class="error">
+            Username is required!
+        </p>
 
         <label for="email"><b>Email</b></label>
-        <input #userEmail="ngModel" ngModel type="text" placeholder="Enter Email" name="email" >
+        <input #userEmail="ngModel" ngModel type="text" placeholder="Enter Email" name="email" required minlength="5" pattern="^[a-zA-Z0-9\.-]{4,}@\w+\.(com|bg)$" >
+
+        <p *ngIf="userEmail.touched && userEmail.errors?.required" class="error">
+            Email is required!
+        </p>
+        <p *ngIf="userEmail.touched && userEmail.errors?.pattern" class="error ">
+            Email is not valid!
+        </p>
+        <p *ngIf="userEmail.touched && userEmail.errors?.minlength" class="error ">
+            Email must be at least 5 characters!
+        </p>
 
         <label for="password"><b>Password</b></label>
-        <input #userPassword="ngModel" ngModel type="password" placeholder="Enter Password" name="password">
+        <input #userPassword="ngModel" ngModel type="password" placeholder="Enter Password" name="password" required minlength="5">
+        <p *ngIf="userPassword.touched && userPassword.errors?.minlength" class="error ">
+            Password must be at least 5 characters!
+        </p>
+        <p *ngIf="userPassword.touched && userPassword.errors?.required" class="error">
+            Password is required!
+        </p>
 
         <label for="rePassword"><b>Repeat Password</b></label>
-        <input #userRePassword="ngModel" ngModel type="password" placeholder="Repeat Password" name="rePassword">
+        <input #userRePassword="ngModel" ngModel type="password" placeholder="Repeat Password" name="rePassword" required minlength="5">
 
-        <button routerLink='/user/register' >Register</button>
+        <p *ngIf="userRePassword.touched && userRePassword.errors?.minlength" class="error ">
+            Repeat Password must be at least 5 characters!
+        </p>
+        <p *ngIf="userRePassword.touched && userRePassword.errors?.required" class="error">
+            Repeat Password is required!
+        </p>
+
+        <p *ngIf="!!errorMessage" class="error">{{errorMessage}}</p>
+
+        <button [disabled]="isLoading || f.invalid">Register</button>
     </div>
 </form>

@@ -1,11 +1,36 @@
+<div *ngIf="isLoading">
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+
 <form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
     <div class="container">
         <label for="email"><b>Email</b></label>
-        <input #userEmail="ngModel" ngModel type="text" placeholder="Enter Email" name="email" required>
+        <input #userEmail="ngModel" ngModel type="text" placeholder="Enter Email" name="email" required minlength="5" pattern="^[a-zA-Z0-9\.-]{4,}@\w+\.(com|bg)$">
+
+        <p *ngIf="userEmail.touched && userEmail.errors?.required" class="error">
+            Email is required!
+        </p>
+        <p *ngIf="userEmail.touched && userEmail.errors?.pattern" class="error ">
+            Email is not valid!
+        </p>
+        <p *ngIf="userEmail.touched && userEmail.errors?.minlength" class="error ">
+            Email must be at least 4 characters!
+        </p>
 
         <label for="password"><b>Password</b></label>
-        <input #userPassword="ngModel" ngModel type="password" placeholder="Enter Password" name="password" required>
+        <input #userPassword="ngModel" ngModel type="password" placeholder="Enter Password" name="password" required minlength="5">
 
-        <button type="submit">Login</button>
+        <p *ngIf="userPassword.touched && userPassword.errors?.minlength" class="error ">
+            Password must be at least 5 characters!
+        </p>
+        <p *ngIf="userPassword.touched && userPassword.errors?.required" class="error">
+            Password is required!
+        </p>
+
+        <p *ngIf="!!errorMessage" class="error">
+            Wrong email or password!
+        </p>
+
+        <button [disabled]="isLoading || f.invalid">Login</button>
     </div>
 </form>

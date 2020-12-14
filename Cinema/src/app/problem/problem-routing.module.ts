@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { AllProblemComponent } from './all-problem/all-problem.component';
 import { CreateComponent } from './create/create.component';
+import { DeleteComponent } from './delete/delete.component';
 
 const routes: Routes = [
     {
@@ -13,6 +14,10 @@ const routes: Routes = [
             {
                 path: 'all',
                 component: AllProblemComponent
+            },
+            {
+                path: 'delete/:id',
+                component: DeleteComponent
             }
         ]
     }

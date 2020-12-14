@@ -9,6 +9,8 @@ import { ProblemService } from '../problem.service';
 })
 export class CreateComponent implements OnInit {
 
+  isLoading = false;
+
   constructor(
     private problemService: ProblemService,
     private router: Router
@@ -18,11 +20,14 @@ export class CreateComponent implements OnInit {
   }
 
   submitFormHandler(data: any): void {
+    this.isLoading = true;
     this.problemService.createProblem(data).subscribe({
       next: () => {
+        this.isLoading = false;
         this.router.navigate(['/problem/all']);
       },
       error: (err) => {
+        this.isLoading = false;
         console.log(err);
       }
     });

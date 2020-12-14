@@ -37,10 +37,6 @@ const userSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "problem"
     }],
-    posts: [{
-        type: ObjectId,
-        ref: "Post"
-    }]
 }, { timestamps: { createdAt: 'created_at' } });
 
 userSchema.methods = {

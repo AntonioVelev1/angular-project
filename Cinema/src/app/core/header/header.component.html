@@ -4,12 +4,16 @@
     </div>
     <nav>
         <ul>
-            <a class="navitem" routerLink="/home">Cinema City</a>
-            <a class="navitem" routerLink="/home">Home</a>
-            <a class="navitem" routerLink="/user/login">Login</a>
-            <a class="navitem" routerLink="/user/register">Register</a>
-            <a class="navitem" (click)="logoutHandler()">Logout</a>
-            <a class="navitem" routerLink="problem/create">Create Problem</a>
+            <a class="navitem" routerLink="/">Cinema City</a>
+            <a class="navitem" routerLink="/">Home</a>
+
+            <a class="navitem" routerLink="/user/login" *ngIf="!isLogged">Login</a>
+            <a class="navitem" routerLink="/user/register" *ngIf="!isLogged">Register</a>
+
+            <a class="navitem" routerLink="/user/profile" *ngIf="isLogged">Profile</a>
+            <a class="navitem" (click)="logoutHandler()" *ngIf="isLogged">Logout</a>
+            <a class="navitem" routerLink="problem/create" *ngIf="isLogged">Create Problem</a>
+            <a class="navitem" routerLink="problem/all" *ngIf="isLogged">All Problems</a>
         </ul>
     </nav>
 </header>

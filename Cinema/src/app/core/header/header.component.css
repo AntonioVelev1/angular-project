@@ -79,3 +79,9 @@ hr{
     border-left: 1px solid lightgrey;
     padding-left: .5em;
 }
+
+a:not([href]):not([tabindex]) {
+    color: white;
+    text-decoration: none;
+}
+
