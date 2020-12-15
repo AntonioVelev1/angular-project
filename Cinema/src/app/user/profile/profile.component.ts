@@ -9,10 +9,6 @@ import { UserService } from '../user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  get isLogged(): boolean {
-    return this.userService.isLogged;
-  }
-
   get currentUser(): IUser {
     return this.userService.currentUser;
   }

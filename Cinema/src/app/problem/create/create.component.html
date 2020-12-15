@@ -1,20 +1,41 @@
 <h1>Create problem</h1>
-
+ 
 <div *ngIf="isLoading">
     <app-loader [isLoading]="isLoading"></app-loader>
 </div>
-
+ 
 <form #f="ngForm" class="modal-content animate" (ngSubmit)="submitFormHandler(f.value)">
     <div class="container">
         <label for="problemName"><b>Name</b></label>
-        <input #problemName="ngModel" type="text" placeholder="Enter name of your problem" name="problemName" ngModel>
-
+        <input #problemName="ngModel" type="text" placeholder="Enter name of your problem" name="problemName" ngModel required minlength="5">
+ 
+        <p *ngIf="problemName.touched && problemName.errors?.minlength" class="error ">
+            Name must be at least 5 characters!
+        </p>
+        <p *ngIf="problemName.touched && problemName.errors?.required" class="error">
+            Name is required!
+        </p>
+ 
         <label for="description"><b>Description</b></label>
-        <input #problemDescription="ngModel" type="text" placeholder="Enter description of your problem" name="description" ngModel>
-
+        <input #problemDescription="ngModel" type="text" placeholder="Enter description of your problem" name="description" ngModel required minlength="10">
+ 
+        <p *ngIf="problemDescription.touched && problemDescription.errors?.minlength" class="error ">
+            Description must be at least 10 characters!
+        </p>
+        <p *ngIf="problemDescription.touched && problemDescription.errors?.required" class="error">
+            Description is required!
+        </p>
+ 
         <label for="imageUrl"><b>Image</b></label>
-        <input #problemImageUrl="ngModel" type="text" placeholder="Enter imageUrl of your problem" name="imageUrl" ngModel>
-
-        <button routerLink='/problem/create'>Create</button>
+        <input #problemImageUrl="ngModel" type="text" placeholder="Enter imageUrl of your problem" name="imageUrl" ngModel required minlength="5">
+ 
+        <!-- <p *ngIf="problemImageUrl.touched && problemImageUrl.errors?.minlength" class="error ">
+            Image must be at least 5 characters!
+        </p>
+        <p *ngIf="problemImageUrl.touched && problemImageUrl.errors?.required" class="error">
+            Image is required!
+        </p> -->
+ 
+        <button [disabled]="isLoading || f.invalid">Create</button>
     </div>
 </form>

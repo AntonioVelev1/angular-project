@@ -1,0 +1,71 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container py-4 my-4 mx-auto d-flex flex-column">
+    <div class="header">
+        <div class="row r1">
+            <div class="col-md-9 abc">
+                <h1>{{problem.problemName}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container-body mt-4">
+        <div class="row r3">
+            <div class="col-md-5 p-0 klo">
+                    <h2>Description</h2>
+                    <p id="description">{{problem.description}}</p>
+            </div>
+            <div class="col-md-7"> <img [src]="problem.imageUrl" width="90%" height="95%"> </div>
+        </div>
+    </div>
+    <div class="footer d-flex flex-column mt-5">
+        <div class="row r4">
+            <div class="col-md-2 myt ">
+
+                <div *ngFor="let comment of problem.comments">
+                    {{comment.text}}
+                </div>
+                <a class="btn btn-outline-warning" routerLink="/problem/all">Back</a>
+                <a *ngIf="isCreator" class="btn btn-outline-warning"
+                    [routerLink]="['/problem/edit', problem._id]">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+<div class="container">
+    <div class="row">
+        <h3>You can give your opinion here!</h3>
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="widget-area no-padding blank">
+                <div class="status-upload">
+              
+                    <form #c="ngForm" (ngSubmit)="createCommentHandler(c.value)">
+                        <div class="input-group">
+                            <textarea rows="3" cols="100" #comment="ngModel" placeholder="Comment" type="text" name="text" ngModel required minlength="4"></textarea>
+    
+                            <p class="error" *ngIf="comment.touched && comment.errors?.required">
+                                Comment is required!
+                            </p>
+                            <p class="error" *ngIf="comment.errors?.minlength">
+                                Comment must be at least 4 characters!
+                            </p>
+    
+                            <button id="com" class="btn btn-primary" [disabled]="isLoading || c.invalid">Comment</button>
+                        </div>
+                    </form>
+
+                </div><!-- Status Upload  -->
+            </div><!-- Widget Area -->
+        </div >
+
+    </div>
+</div>

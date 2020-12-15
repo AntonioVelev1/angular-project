@@ -13,12 +13,13 @@ import { UserModule } from './user/user.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProblemModule } from './problem/problem.module';
 import { SharedModule } from './shared/shared.module';
+import { CommentModule } from './comment/comment.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     CoreModule,
@@ -28,6 +29,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     AppRoutingModule,
     ProblemModule,
+    CommentModule,
     SharedModule
   ],
   providers: [],

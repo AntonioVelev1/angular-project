@@ -23,18 +23,23 @@ export class AllProblemComponent implements OnInit {
     });
   }
 
-  deleteProblem(problemId: string): void {
+  deleteProblem(problemId): void {
     this.isLoading = true;
-    this.problemService.deleteProblem(problemId).subscribe({
-      next: () => {
-        this.isLoading = false;
-        window.location.reload();
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.log(err);
-      }
-    });
+    if (confirm('Are you sure you want delete this problem?')) {
+      this.problemService.deleteProblem(problemId).subscribe({
+        next: () => {
+          this.isLoading = false;
+          window.location.reload();
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      });
+    }
+    this.isLoading = false;
+
   }
+ 
 
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IProblem } from 'src/app/shared/interfaces';
+import { ProblemService } from '../problem.service';
 
 @Component({
   selector: 'app-edit',
@@ -7,9 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  errorMessege = '';
+  isLoading = false;
 
-  ngOnInit(): void {
+  problem: IProblem | null;
+
+  constructor(
+    private problemService: ProblemService,
+    activatedRoute: ActivatedRoute,
+    private router: Router
+
+  ) {
+    const id = activatedRoute.snapshot.params.id;
+    problemService.details(id).subscribe(problem => {
+      this.problem = problem;
+    })
   }
 
+  ngOnInit(): void {
+
+  }
+
+  editProblemHandler(data): void {
+    this.isLoading = true;
+    this.errorMessege = '';
+    this.problemService.editProblem({ problemId: this.problem._id, formData: data }).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/problem/details/', this.problem._id]);
+      },
+      error: (err) => {
+        this.errorMessege = err.message;
+      }
+    })
+  }
 }
+

@@ -7,7 +7,8 @@ import { ProblemService } from './problem.service';
 import { AllProblemComponent } from './all-problem/all-problem.component';
 import { SharedModule } from '../shared/shared.module';
 import { EditComponent } from './edit/edit.component';
-import { DeleteComponent } from './delete/delete.component';
+import { DetailsComponent } from './details/details.component';
+import { CommentModule } from '../comment/comment.module';
 
 
 
@@ -16,14 +17,15 @@ import { DeleteComponent } from './delete/delete.component';
     CreateComponent,
     AllProblemComponent,
     EditComponent,
-    DeleteComponent
+    DetailsComponent
   ],
   imports: [
     CommonModule,
     ProblemRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    CommentModule
   ],
   providers: [
     ProblemService
@@ -31,7 +33,8 @@ import { DeleteComponent } from './delete/delete.component';
   exports: [
     CreateComponent,
     AllProblemComponent,
-    DeleteComponent
+    EditComponent,
+    DetailsComponent
   ]
 }) 
 export class ProblemModule { }

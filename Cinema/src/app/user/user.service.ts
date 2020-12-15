@@ -11,16 +11,16 @@ const apiUrl = environment.apiUrl;
 export class UserService {
 
   currentUser: IUser| null;
+  
+    get isLogged(): boolean { return !!this.currentUser; }
 
   constructor(private http: HttpClient) {
 
   }
 
-  get isLogged(): boolean { return !!this.currentUser; }
-
   login(data): Observable<IUser> {
     return this.http.post(`${apiUrl}/users/login`, data, { withCredentials: true }).pipe(
-      tap((user: IUser | null) => this.currentUser = user)
+      tap((user: IUser) => this.currentUser = user)
     );
   }
 

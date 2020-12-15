@@ -1,13 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
-// import { AuthGuard } from './core/guards/auth.guard';
+import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
-
     {
         path: '',
-        // canActivateChild: [AuthGuard],
+        //canActivateChild: [AuthGuard],
         children: [
             {
                 path: '',
@@ -16,11 +15,17 @@ const routes: Routes = [
             },
             {
                 path: 'home',
-                component: HomeComponent
+                component: HomeComponent,
+                data: {
+                    title: 'Home page'
+                }
             },
             {
                 path: '**',
-                component: NotFoundComponent
+                component: NotFoundComponent,
+                data: {
+                    title: 'Home page'
+                }
             }
         ]
     }

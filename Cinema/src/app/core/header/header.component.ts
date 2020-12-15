@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, ActivationEnd, NavigationEnd, Router } from '@angular/router';
+import { ActivationEnd, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { buffer, debounceTime, filter, map } from 'rxjs/operators';
 import { IUser } from 'src/app/shared/interfaces/user';
@@ -28,11 +28,11 @@ export class HeaderComponent {
     public userService: UserService,
     private router: Router) { 
 
-      // router.events.pipe(
-      //   filter(e => e instanceof ActivationEnd),
-      //   buffer(router.events.pipe(filter(e=>e instanceof NavigationEnd), debounceTime(0))),
-      //   map((events: ActivationEnd[]) => events.reduce((acc,curr) => ({...acc, ...curr.snapshot.data}))),
-      // ).subscribe(console.log);
+      router.events.pipe(
+        filter(e => e instanceof ActivationEnd),
+        buffer(router.events.pipe(filter(e=>e instanceof NavigationEnd), debounceTime(0))),
+        map((events: ActivationEnd[]) => events.reduce((acc,curr) => ({...acc, ...curr.snapshot.data}))),
+      ).subscribe(console.log);
     }
 
   logoutHandler(): void {

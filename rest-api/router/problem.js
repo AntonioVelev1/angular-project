@@ -8,8 +8,10 @@ const { problemController, commentController } = require('../controllers');
 router.get('/all', problemController.getproblems);
 router.post('/create', auth(), problemController.createproblem);
 router.delete('/delete/:id', auth(), problemController.deleteProblem);
+router.get('/details/:id', problemController.getproblem);
+router.put('/edit/:id', auth(), problemController.editProblem);
 
-router.get('/:problemId', problemController.getproblem);
+
 router.post('/:problemId', auth(), commentController.createcomment);
 router.put('/:problemId', auth(), problemController.subscribe);
 router.put('/:problemId/comments/:commentId', auth(), commentController.editcomment);

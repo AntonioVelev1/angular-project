@@ -1,1 +1,41 @@
-<p>edit works!</p>
+<h1>Edit problem</h1>
+ 
+<div *ngIf="isLoading">
+    <app-loader [isLoading]="isLoading"></app-loader>
+</div>
+ 
+<form #f="ngForm" class="modal-content animate" (ngSubmit)="editProblemHandler(f.value)" *ngIf="!isLoading">
+    <div class="container">
+        <label for="problemName"><b>Name</b></label>
+        <input #problemName="ngModel" type="text" name="problemName" [ngModel]="problem.problemName"  required minlength="5">
+ 
+        <p *ngIf="problemName.touched && problemName.errors?.minlength" class="error ">
+            Name must be at least 5 characters!
+        </p>
+        <p *ngIf="problemName.touched && problemName.errors?.required" class="error">
+            Name is required!
+        </p>
+ 
+        <label for="description"><b>Description</b></label>
+        <input #problemDescription="ngModel" type="text" placeholder="Enter description of your problem" name="description" [ngModel]="problem.description" required minlength="10">
+ 
+        <p *ngIf="problemDescription.touched && problemDescription.errors?.minlength" class="error ">
+            Description must be at least 10 characters!
+        </p>
+        <p *ngIf="problemDescription.touched && problemDescription.errors?.required" class="error">
+            Description is required!
+        </p>
+ 
+        <label for="imageUrl"><b>Image</b></label>
+        <input #problemImageUrl="ngModel" type="text" placeholder="Enter imageUrl of your problem" name="imageUrl" [ngModel]="problem.imageUrl" required minlength="5">
+ 
+        <p *ngIf="problemImageUrl.touched && problemImageUrl.errors?.minlength" class="error ">
+            Image must be at least 5 characters!
+        </p>
+        <p *ngIf="problemImageUrl.touched && problemImageUrl.errors?.required" class="error">
+            Image is required!
+        </p>
+ 
+        <button [disabled]="isLoading || f.invalid">Edit Problem</button>
+    </div>
+</form>

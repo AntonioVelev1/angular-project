@@ -24,11 +24,9 @@ function getLatestscomments(req, res, next) {
 }
 
 function createcomment(req, res, next) {
-    const { problemId } = req.params;
-    const { _id: userId } = req.user;
-    const { commentText } = req.body;
+    const { problemId, userId, text } = req.body;
 
-    newcomment(commentText, userId, problemId)
+    newcomment(text, userId, problemId)
         .then(([_, updatedproblem]) => res.status(200).json(updatedproblem))
         .catch(next);
 }

@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-
 <div *ngIf="isLoading">
     <app-loader [isLoading]="isLoading"></app-loader>
 </div>
@@ -17,8 +15,10 @@
         <div class="col-md-5">
             <h3>{{problem.problemName}}</h3>
             <p>{{problem.description}}</p>
-            <img [src]="problem.imageUrl" alt="">
+            <img [src]="problem.imageUrl" class="img" alt="">
             <a class="btn btn-primary" (click)="deleteProblem(problem._id)">Delete</a>
+            <a [routerLink]="['/problem/details', problem._id]" class="btn-block col-xs-3 btn btn-danger">detail Post</a>
+
         </div>
     </div>
 </div>
