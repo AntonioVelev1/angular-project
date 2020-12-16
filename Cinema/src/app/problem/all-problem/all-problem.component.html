@@ -2,23 +2,18 @@
     <app-loader [isLoading]="isLoading"></app-loader>
 </div>
 
-<h1>All</h1>
+<h1 id="h1">All Cars</h1>
 
 
-<div *ngFor="let problem of problemList">
+<div *ngFor="let problem of problemList" class="all">
     <div class="row">
         <div class="col-md-7">
-            <!-- <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-        </a> -->
-        </div>
-        <div class="col-md-5">
-            <h3>{{problem.problemName}}</h3>
-            <p>{{problem.description}}</p>
-            <img [src]="problem.imageUrl" class="img" alt="">
-            <a class="btn btn-primary" (click)="deleteProblem(problem._id)">Delete</a>
-            <a [routerLink]="['/problem/details', problem._id]" class="btn-block col-xs-3 btn btn-danger">detail Post</a>
-
+            <div class="col-md-5">
+                <h3 id="h3">{{problem.problemName}}</h3>
+                <img [src]="problem.imageUrl" class="all img" alt="">
+                <a [routerLink]="['/problem/details', problem._id]" id="button">Details</a>
+                
+            </div>
         </div>
     </div>
 </div>

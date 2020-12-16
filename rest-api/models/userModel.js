@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "problem"
     }],
+    comments: [{
+        type: ObjectId,
+        ref: "comment"
+    }]
 }, { timestamps: { createdAt: 'created_at' } });
 
 userSchema.methods = {

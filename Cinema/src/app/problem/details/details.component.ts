@@ -13,6 +13,10 @@ import { ProblemService } from '../problem.service';
 export class DetailsComponent implements OnInit {
 
   isLoading = false;
+  errorMessage = '';
+
+  isOnEdit = false;
+  commentToEdit = '';
 
   get isCreator(): boolean {
     return !!(this.problem.userId._id === this.userService.currentUser._id);
@@ -50,7 +54,63 @@ export class DetailsComponent implements OnInit {
         console.log(err.message);
       }
     })
+  }
+
+  deleteProblem(problemId): void {
+    this.isLoading = true;
+    if (confirm('Are you sure you want delete this problem?')) {
+      this.problemService.deleteProblem(problemId).subscribe({
+        next: () => {
+          this.isLoading = false;
+          window.location.reload();
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      });
+    }
+    this.isLoading = false;
 
   }
 
+  editComment(id): void {
+    this.isOnEdit = true;
+    this.commentToEdit = id;
+  }
+
+  editedCommentHandler(data): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    this.commentService.editComment({ commentId: data.commentId, user: this.userService.currentUser, content: data.newComment }).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.isOnEdit = false;
+        window.location.reload();
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+        console.log(err.message);
+      }
+    })
+  }
+
+  deleteComment(id): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    if (confirm('Are you sure you want delete this comment?')) {
+      this.commentService.deleteComment({ commentId: id, userId: this.userService.currentUser._id, problemId: this.problem._id }).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.isOnEdit = false;
+          window.location.reload();
+        },
+        error: (err) => {
+          this.errorMessage = err.message;
+          console.log(err.message);
+        }
+      })
+    }
+  }
+  
 }

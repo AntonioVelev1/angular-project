@@ -1,4 +1,4 @@
-/* welcome component */
+/* welcome component
 
 .welcome {
     padding: 0.3em 0.5em;
@@ -44,4 +44,17 @@
 
 .welcome li {
     list-style: none;
+} */
+
+.text-center {
+    text-align: center;
+    font-weight: 900;
+    color: white;
+    padding-top: 500px;
+    padding-bottom: 500px;
+    background-image: url('../../assets/background2.jpg');
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
 }

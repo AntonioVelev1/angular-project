@@ -1,8 +1,14 @@
-<div *ngIf="!isLogged" class="welcome">
-    <h3>Welcome!</h3>
-    <p>Cinema is a place, where you can search and check for your favourite films. Enjoy with us!!!</p>
-  </div>
-  
-  <div *ngIf="isLogged">
-    <app-all-problem></app-all-problem>
-  </div>
+<div *ngIf="!isLogged" class="background text-center">
+  <h3>Welcome!</h3>
+  <p>Car city is a place, where you can see a wide range of cars. You can find infomartion about diffrent cars.
+    If you want to expand our family you can register and help us. Enjoy with us!!!</p>
+    <ul>
+      <a routerLink="/user/register">
+        <i class="fas fa-user-circle"></i>Register now!
+      </a>
+    </ul>
+</div>
+
+<div *ngIf="isLogged" class="background text-center">
+  <a routerLink="/probem/all"></a>
+</div>

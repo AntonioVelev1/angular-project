@@ -21,25 +21,6 @@ export class AllProblemComponent implements OnInit {
       this.isLoading = false;
       this.problemList = problemList;
     });
-  }
-
-  deleteProblem(problemId): void {
-    this.isLoading = true;
-    if (confirm('Are you sure you want delete this problem?')) {
-      this.problemService.deleteProblem(problemId).subscribe({
-        next: () => {
-          this.isLoading = false;
-          window.location.reload();
-        },
-        error: (err) => {
-          this.isLoading = false;
-          console.log(err);
-        }
-      });
-    }
-    this.isLoading = false;
-
-  }
- 
+  } 
 
 }

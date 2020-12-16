@@ -1,21 +1,7 @@
-/* footer {
-    background-color: rgb(0, 128, 117);
-    color: white;
-    text-transform: capitalize;
-    text-align: justify;
-    margin-top: 1em;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+#myFooter {
+    margin-top: 120px;
 }
 
-footer p {
-    margin: 1em;
-    font-size: 1em;
-    text-align: center;
-} */
-
-/* Footer */
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 section {
     padding: 30px 0;
