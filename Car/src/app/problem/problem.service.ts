@@ -19,26 +19,26 @@ export class ProblemService {
   constructor(private http: HttpClient) { }
  
   createProblem(data): Observable<IProblem<IUser>> {
-    return this.http.post<IProblem<IUser>>(`${apiUrl}/problems/create`, data, { withCredentials: true }).pipe(
+    return this.http.post<IProblem<IUser>>(`/problems/create`, data).pipe(
       tap((post: IProblem) => this.currentProblem = post)
     );
   }
 
   allProblems(): Observable<IProblem[]> {
-    return this.http.get<IProblem[]>(`${apiUrl}/problems/all`, { withCredentials: true });
+    return this.http.get<IProblem[]>(`/problems/all`);
   }
 
   details(id): Observable<IProblem> {
-    return this.http.get<IProblem>(`${apiUrl}/problems/details/${id}`, { withCredentials: true });
+    return this.http.get<IProblem>(`/problems/details/${id}`);
   }
 
   editProblem(data): Observable<IProblem<IUser>> {
-    return this.http.put<IProblem<IUser>>(`${apiUrl}/problems/edit/${data.problemId}`, data.formData, { withCredentials: true }).pipe(
+    return this.http.put<IProblem<IUser>>(`/problems/edit/${data.problemId}`, data.formData).pipe(
       tap((problem: IProblem) => this.currentProblem = problem)
     );
   }
 
   deleteProblem(id: string): Observable<any> {
-    return this.http.delete<any>(`${apiUrl}/problems/delete/${id}`, { withCredentials: true });
+    return this.http.delete<any>(`/problems/delete/${id}`);
   }
 }

@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
     this.problemService.editProblem({ problemId: this.problem._id, formData: data }).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/problem/details/', this.problem._id]);
+        this.router.navigate(['/car/details/', this.problem._id]);
       },
       error: (err) => {
         this.errorMessege = err.message;

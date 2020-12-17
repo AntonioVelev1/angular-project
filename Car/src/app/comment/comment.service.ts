@@ -18,17 +18,17 @@ export class CommentService {
   ) { }
 
   createComment(data): Observable<IComment<IUser>> {
-    return this.http.post<IComment<IUser>>(`${apiUrl}/comments/create`, data, { withCredentials: true }).pipe(
+    return this.http.post<IComment<IUser>>(`/comments/create`, data).pipe(
       tap((comment: IComment | null) => this.currentComment = comment)
     )
   }
 
   editComment(data): Observable<any>{
-    return this.http.put<any>(`${apiUrl}/comments/edit/${data.commentId}`, {content: data.content, user: data.user}, { withCredentials: true });
+    return this.http.put<any>(`/comments/edit/${data.commentId}`, {content: data.content, user: data.user});
   } 
  
   deleteComment(data): Observable<any> {
-    return this.http.get<any>(`${apiUrl}/comments/delete/${data.commentId}?problemId=${data.problemId}&userId=${data.userId}`, { withCredentials: true });
+    return this.http.get<any>(`/comments/delete/${data.commentId}?problemId=${data.problemId}&userId=${data.userId}`);
   }
 
 }
