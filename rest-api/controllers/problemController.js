@@ -13,11 +13,17 @@ function getproblems(req, res, next) {
 }
 
 function getproblem(req, res, next) {
-    const  problemId = req.params.id;
+    const problemId = req.params.id;
 
     problemModel.findById(problemId)
-        .populate('userId')
         .populate('comments')
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'userId'
+            }
+        })
+        .populate('userId')
         .then(problem => res.json(problem))
         .catch(next);
 }
@@ -39,7 +45,7 @@ function editProblem(req, res, next) {
     const poblemId = req.params.id;
     const { problemName, description, imageUrl } = req.body;
     const { id: userId } = req.user;
- 
+
     // if the userId is not the same as this one of the comment, the comment will not be updated
     problemModel.findOneAndUpdate({ _id: poblemId, userId }, { problemName: problemName, imageUrl: imageUrl, description: description }, { new: true })
         .then(updatedpost => {
@@ -56,12 +62,12 @@ function editProblem(req, res, next) {
 function deleteProblem(req, res, next) {
     const problemId = req.params.id;
     const { id: userId } = req.user;
- 
+
     Promise.all([
-            problemModel.findOneAndDelete({ _id: problemId }),
-            commentModel.deleteMany({ "problemId": problemId }),
-            userModel.findOneAndUpdate({ _id: userId }, { $pull: { problems: problemId } }),
-        ])
+        problemModel.findOneAndDelete({ _id: problemId }),
+        commentModel.deleteMany({ "problemId": problemId }),
+        userModel.findOneAndUpdate({ _id: userId }, { $pull: { problems: problemId } }),
+    ])
         .then(([deletedOne, _, __]) => {
             if (deletedOne) {
                 res.status(200).json(deletedOne)

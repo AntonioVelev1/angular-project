@@ -2,6 +2,11 @@
     padding: 16px;
 }
 
+.page-title {
+    text-align: center;
+    font-size: 40px;
+}
+
 .modal-content {
     background-color: #fefefe;
     margin: 5% auto 15% auto;

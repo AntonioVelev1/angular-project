@@ -1,0 +1,113 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div id="cheaf">
+    <div class="container py-4 my-4 mx-auto d-flex flex-column">
+        <div class="header">
+            <div class="row r1">
+                <div class="col-md-9 abc">
+                    <h1 class="title">{{problem.problemName}}</h1>
+                </div>
+                <div class="col-md-10"> <img [src]="problem.imageUrl" width="90%" height="95%"> </div>
+            </div>
+        </div>
+        <div class="container-body mt-4">
+            <div class="row r4">
+                <div class="col-md-5">
+                    <h2 id="description">Description</h2>
+                    <p class="p">{{problem.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-column mt-5">
+
+            <a class="btn btn-outline-success" routerLink="/car/all">Back</a>
+            <a *ngIf="isCreator" class="btn btn-outline-success" [routerLink]="['/car/edit', problem._id]">Edit</a>
+            <a *ngIf="isCreator" class="btn btn-outline-success" (click)="deleteProblem(problem._id)">Delete Car</a>
+
+        </div>
+
+        <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+        <div class="container">
+            <div class="row">
+                <h3>You can give your opinion here!</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget-area no-padding blank">
+                        <div class="status-upload">
+
+                            <form #c="ngForm" (ngSubmit)="createCommentHandler(c.value)">
+                                <div class="input-group">
+                                    <textarea rows="3" cols="100" #comment="ngModel" placeholder="Comment" type="text"
+                                        name="text" ngModel required minlength="4"></textarea>
+
+                                    <p class="error" *ngIf="comment.touched && comment.errors?.required">
+                                        Comment is required!
+                                    </p>
+                                    <p class="error" *ngIf="comment.errors?.minlength">
+                                        Comment must be at least 4 characters!
+                                    </p>
+
+                                    <button id="com" class="comment-buttons"
+                                        [disabled]="isLoading || c.invalid">Comment</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngFor="let comment of problem.comments" class="comments-list">
+                <div class="comment">
+                    <div class="comment-body">
+                        <div class="comment-text">
+                            <div class="comment-user">
+                                <h4>{{comment.userId.username}}</h4>
+                                <h5>{{comment.userId.created_at}}</h5>
+                                
+                                <p *ngIf="!isOnEdit">
+                                    {{comment.text}}
+                                </p>
+                            </div>
+                            <div *ngIf="currentUser.comments.includes(comment._id)">
+                                <div class="comment-a">
+                                    <a (click)="editComment(comment._id)">Edit Comment</a>
+                                </div>
+                                <div *ngIf="isOnEdit && comment._id === commentToEdit">
+                                    <form id="editForm" #f="ngForm"
+                                        (ngSubmit)="editedCommentHandler({commentId:comment._id, newComment:f.value})">
+                                        <div class="input-group">
+                                            <textarea #editcomment="ngModel" class="input-error" placeholder="Comment"
+                                                rows="3" cols="100" type="text" name="comment" id="comment"
+                                                [ngModel]="comment.text" required minlength="4"></textarea>
+
+                                            <p class="error"
+                                                *ngIf="editcomment.touched && editcomment.errors?.required">
+                                                Comment is required!
+                                            </p>
+                                            <p class="error" *ngIf="editcomment.errors?.minlength">
+                                                Comment must be at least 4 characters!
+                                            </p>
+                                            <button class="comment-buttons"
+                                                [disabled]="isLoading || f.invalid">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="comment-a">
+                                    <a (click)="deleteComment(comment._id)">Delete Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

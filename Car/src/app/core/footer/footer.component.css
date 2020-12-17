@@ -1,5 +1,5 @@
 #myFooter {
-    margin-top: 120px;
+    margin-top: 80px;
 }
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -80,7 +80,7 @@ section .section-title {
     border-left: transparent;
     padding-bottom: 0px;
     margin-bottom: 10px;
-}
+  }
 }
 
 /***
@@ -94,7 +94,7 @@ section .section-title {
 
  /* Styling h1 and links
  ––––––––––––––––––––––––––––––––– */
- 
+
  a[href], a[href]:hover {
     color: grey;
     font-size: 0.5em;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from 'src/app/comment/comment.service';
 import { IProblem, IUser } from 'src/app/shared/interfaces';
+import { IComment } from 'src/app/shared/interfaces/comment';
 import { UserService } from 'src/app/user/user.service';
 import { ProblemService } from '../problem.service';
 
@@ -26,12 +27,13 @@ export class DetailsComponent implements OnInit {
     return this.userService.currentUser;
   }
 
-  problem: IProblem | null;
+  problem: IProblem<IComment> | null;
 
   constructor(
     private problemService: ProblemService,
     private commentService: CommentService,
     private userService: UserService,
+    private router: Router,
     activatedRoute: ActivatedRoute
   ) {
     const id = activatedRoute.snapshot.params.id;
@@ -62,7 +64,7 @@ export class DetailsComponent implements OnInit {
       this.problemService.deleteProblem(problemId).subscribe({
         next: () => {
           this.isLoading = false;
-          window.location.reload();
+          this.router.navigate(['/car/all']);
         },
         error: (err) => {
           this.isLoading = false;

@@ -24,7 +24,7 @@ export class CreateComponent implements OnInit {
     this.problemService.createProblem(data).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/problem/all']);
+        this.router.navigate(['/car/all']);
       },
       error: (err) => {
         this.isLoading = false;

@@ -8,7 +8,10 @@ import { IProblem } from '../shared/interfaces/problem';
 
 const apiUrl = environment.apiUrl;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class ProblemService {
 
   currentProblem: IProblem | null;
@@ -25,10 +28,8 @@ export class ProblemService {
     return this.http.get<IProblem[]>(`${apiUrl}/problems/all`, { withCredentials: true });
   }
 
-  details(id): Observable<IProblem<IUser>> {
-    return this.http.get<IProblem<IUser>>(`${apiUrl}/problems/details/${id}`, { withCredentials: true }).pipe(
-      tap((problem: IProblem) => this.currentProblem = problem)
-    );
+  details(id): Observable<IProblem> {
+    return this.http.get<IProblem>(`${apiUrl}/problems/details/${id}`, { withCredentials: true });
   }
 
   editProblem(data): Observable<IProblem<IUser>> {

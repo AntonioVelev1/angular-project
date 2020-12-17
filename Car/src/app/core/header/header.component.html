@@ -12,8 +12,8 @@
 
             <a class="navitem" routerLink="/user/profile" *ngIf="isLogged">Profile</a>
             <a class="navitem" (click)="logoutHandler()" *ngIf="isLogged">Logout</a>
-            <a class="navitem" routerLink="problem/create" *ngIf="isLogged">Create New Car</a>
-            <a class="navitem" routerLink="problem/all" *ngIf="isLogged">All Cars</a>
+            <a class="navitem" routerLink="car/create" *ngIf="isLogged">Create New Car</a>
+            <a class="navitem" routerLink="car/all" *ngIf="isLogged">All Cars</a>
         </ul>
     </nav>
 </header>
